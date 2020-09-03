@@ -8,19 +8,13 @@ fn main() {
     let mut frequencies_seen = HashSet::<isize>::new();
 
     loop {
-        for str_num in contents.split("\n") {
-            if str_num != "" {
-                if str_num.starts_with("-") {
-                    sum += str_num.parse::<isize>().unwrap();
-                } else {
-                    sum += &str_num[1..].parse::<isize>().unwrap();
-                }
-                if frequencies_seen.contains(&sum) {
-                    println!("{}", sum);
-                    return
-                }
-                frequencies_seen.insert(sum);
+        for str_num in contents.lines() {
+            sum += str_num.parse::<isize>().unwrap();
+            if frequencies_seen.contains(&sum) {
+                println!("{}", sum);
+                return
             }
+            frequencies_seen.insert(sum);
         }
         // break
     }
